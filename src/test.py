@@ -1,11 +1,14 @@
 import pygame
 from pygame.locals import *
 import tkinter
+from Board import *
 import sys   # for exit and arg
 
-def Draw(surf):
+def Draw(surf,board):
   #Clear view
   surf.fill((80,80,80))
+  board_painter=board.make_painter()
+  board_painter(surf)
   pygame.display.flip()
 
 
@@ -28,7 +31,7 @@ def quit_callback():
   global Done
   Done = True
 
-def main():
+def main(board):
 
   # initialise pygame
   pygame.init()
@@ -54,10 +57,12 @@ def main():
 
     if GetInput():  # input event can also comes from diaglog
       break
-    Draw(Surface)
+    Draw(Surface,board)
     clock.tick(100) # slow it to something slightly realistic
     gameframe += 1
 
   main_dialog.destroy()
 
-if __name__ == '__main__': main()
+if __name__ == '__main__': 
+	b=Board()
+	main(b)
