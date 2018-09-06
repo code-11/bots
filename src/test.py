@@ -2,13 +2,20 @@ import pygame
 from pygame.locals import *
 import tkinter
 from Board import *
+from Players import *
+from Player import *
 import sys   # for exit and arg
 
-def Draw(surf,board):
+def Draw(surf,board,players):
   #Clear view
-  surf.fill((80,80,80))
+  surf.fill((200,200,200))
+
   board_painter=board.make_painter()
   board_painter(surf)
+
+  players_painter=players.make_painter()
+  players_painter(surf)
+
   pygame.display.flip()
 
 
@@ -31,11 +38,11 @@ def quit_callback():
   global Done
   Done = True
 
-def main(board):
+def main(board,players):
 
   # initialise pygame
   pygame.init()
-  ScreenSize = (200,100)
+  ScreenSize = board.board_size()
   Surface = pygame.display.set_mode(ScreenSize)
 
   #initialise tkinter
@@ -57,7 +64,7 @@ def main(board):
 
     if GetInput():  # input event can also comes from diaglog
       break
-    Draw(Surface,board)
+    Draw(Surface,board,players)
     clock.tick(100) # slow it to something slightly realistic
     gameframe += 1
 
@@ -65,4 +72,5 @@ def main(board):
 
 if __name__ == '__main__': 
 	b=Board()
-	main(b)
+	ps=Players()
+	main(b,ps)
