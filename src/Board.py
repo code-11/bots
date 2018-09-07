@@ -15,20 +15,39 @@ class Board:
 		for i in range(x):
 			arr=[]
 			for j in range(y):
-				arr.append(0)
+				arr.append(None)
 			to_return.append(arr)
 		return to_return
 			
+	@staticmethod
+	def brighten(color):
+		r=Board.clamp_color(color.r+140)
+		g=Board.clamp_color(color.g+140)
+		b=Board.clamp_color(color.b+140)
+		return col.Color(r,g,b,color.a) 
+
+	@staticmethod
+	def clamp_color(val):
+		if val<0:
+			return 0
+		if val>255:
+			return 255
+		return val
 
 	def __init__(self):
 		self.data=self.zeros(Board.XLEN,Board.YLEN)
 
-	def make_paint_helper(self,surf):
-		white=col.Color(244, 244, 244, 244)
+	def set_claim(self,x,y,player):
+		self.data[x][y]=player
+
+	def make_paint_helper(self,surf,color_map):
 		for i,arr in enumerate(self.data):
 			for j,el in enumerate(arr):
 				rect=rec.Rect(i*(Board.WIDTH+Board.PADDING),j*(Board.WIDTH+Board.PADDING),Board.WIDTH,Board.WIDTH)
-				pydraw.rect(surf,white,rect)
+				col=color_map[el]
+				if(el!=None):
+					col=Board.brighten(col)
+				pydraw.rect(surf,col,rect)
 
 	def make_painter(self):
 		return self.make_paint_helper

@@ -3,7 +3,6 @@ from pygame.locals import *
 import tkinter
 from Board import *
 from Players import *
-from Player import *
 import sys   # for exit and arg
 
 def Draw(surf,board,players):
@@ -11,7 +10,7 @@ def Draw(surf,board,players):
   surf.fill((200,200,200))
 
   board_painter=board.make_painter()
-  board_painter(surf)
+  board_painter(surf,players.color_map)
 
   players_painter=players.make_painter()
   players_painter(surf)
@@ -73,4 +72,10 @@ def main(board,players):
 if __name__ == '__main__': 
 	b=Board()
 	ps=Players()
+
+	b.set_claim(3,10,ps.data[0])
+	b.set_claim(4,10,ps.data[0])
+	b.set_claim(3,9,ps.data[0])
+	b.set_claim(3,8,ps.data[0])
+
 	main(b,ps)
