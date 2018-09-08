@@ -40,6 +40,12 @@ class Board:
 	def set_claim(self,x,y,player):
 		self.data[x][y]=player
 
+	def x_size(self):
+		return len(self.data)
+
+	def y_size(self):
+		return len(self.data[0])
+
 	def make_paint_helper(self,surf,color_map):
 		for i,arr in enumerate(self.data):
 			for j,el in enumerate(arr):

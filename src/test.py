@@ -5,6 +5,7 @@ from Board import *
 from Players import *
 import sys   # for exit and arg
 
+
 def Draw(surf,board,players):
   #Clear view
   surf.fill((200,200,200))
@@ -18,15 +19,14 @@ def Draw(surf,board,players):
   pygame.display.flip()
 
 
-def GetInput():
+def GetInput(board,players):
 
   for event in pygame.event.get():
     if event.type == QUIT:
       return True
-    if event.type == KEYDOWN:
+    if event.type == KEYDOWN or event.type == MOUSEBUTTONDOWN:
       print (event)
-    if event.type == MOUSEBUTTONDOWN:
-      print (event)
+      players.move(board)
     sys.stdout.flush()  # get stuff to the console
   return False
 
@@ -61,7 +61,7 @@ def main(board,players):
     except:
       print ("dialog error")
 
-    if GetInput():  # input event can also comes from diaglog
+    if GetInput(board,players):  # input event can also comes from diaglog
       break
     Draw(Surface,board,players)
     clock.tick(100) # slow it to something slightly realistic
@@ -72,10 +72,4 @@ def main(board,players):
 if __name__ == '__main__': 
 	b=Board()
 	ps=Players()
-
-	b.set_claim(3,10,ps.data[0])
-	b.set_claim(4,10,ps.data[0])
-	b.set_claim(3,9,ps.data[0])
-	b.set_claim(3,8,ps.data[0])
-
 	main(b,ps)

@@ -1,8 +1,16 @@
 import pygame.draw as pydraw
 import pygame.rect as rec
 
+from enum import Enum
+
 from Board import *
 from RoundedRect import *
+
+class Direction(Enum):
+	UP   = 1
+	DOWN = 2
+	LEFT = 3
+	RIGHT= 4
 
 class Player:
 	INSET_X=2
@@ -29,3 +37,6 @@ class Player:
 
 	def make_painter(self):
 		return self.make_paint_helper
+
+	def get_next_move(self):
+		return Direction.UP
