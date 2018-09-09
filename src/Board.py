@@ -2,6 +2,8 @@ import pygame.draw as pydraw
 import pygame.color as col
 import pygame.rect as rec
 class Board:
+	BLANK=0
+
 	WIDTH=10
 	PADDING=1
 	XLEN=50
@@ -15,7 +17,7 @@ class Board:
 		for i in range(x):
 			arr=[]
 			for j in range(y):
-				arr.append(None)
+				arr.append(Board.BLANK)
 			to_return.append(arr)
 		return to_return
 			
@@ -38,7 +40,7 @@ class Board:
 		self.data=self.zeros(Board.XLEN,Board.YLEN)
 
 	def set_claim(self,x,y,player):
-		self.data[x][y]=player
+		self.data[x][y]=player.uid
 
 	def x_size(self):
 		return len(self.data)

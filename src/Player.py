@@ -22,11 +22,14 @@ class Player:
 	x_pos=None
 	y_pos=None
 	color=None
+	uid=None
 
 	def __init__(self,x_pos,y_pos,color):
 		self.x_pos=x_pos
 		self.y_pos=y_pos
 		self.color=color
+		self.uid=None
+
 
 	def __str__(self):
 		return "<Player x:"+self.x_pos+" y:"+self.y_pos+" col:"+self.color
