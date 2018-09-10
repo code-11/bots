@@ -24,12 +24,14 @@ class Player:
 	y_pos=None
 	color=None
 	uid=None
+	bot=None
 
-	def __init__(self,x_pos,y_pos,color):
+	def __init__(self,x_pos,y_pos,color,bot):
 		self.x_pos=x_pos
 		self.y_pos=y_pos
 		self.color=color
 		self.uid=None
+		self.bot=bot
 
 	def __str__(self):
 		return "<Player x:"+self.x_pos+" y:"+self.y_pos+" col:"+self.color
@@ -42,4 +44,4 @@ class Player:
 		return self.make_paint_helper
 
 	def get_next_move(self):
-		return Direction.UP
+		return self.bot.get_next_move()

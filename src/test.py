@@ -3,6 +3,7 @@ from pygame.locals import *
 import tkinter
 from Board import *
 from Players import *
+
 import sys   # for exit and arg
 
 
@@ -69,7 +70,9 @@ def main(board,players):
 
   main_dialog.destroy()
 
+
 if __name__ == '__main__': 
+	# load_players()
 	b=Board()
 	ps=Players()
 	main(b,ps)
