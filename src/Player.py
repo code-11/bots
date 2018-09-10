@@ -11,6 +11,7 @@ class Direction(Enum):
 	DOWN = 2
 	LEFT = 3
 	RIGHT= 4
+	SIT  = 5
 
 class Player:
 	INSET_X=2
@@ -29,7 +30,6 @@ class Player:
 		self.y_pos=y_pos
 		self.color=color
 		self.uid=None
-
 
 	def __str__(self):
 		return "<Player x:"+self.x_pos+" y:"+self.y_pos+" col:"+self.color
