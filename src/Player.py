@@ -13,6 +13,17 @@ class Direction(Enum):
 	RIGHT= 4
 	SIT  = 5
 
+	def clockwise(self):
+		clock={Direction.UP:Direction.RIGHT,Direction.RIGHT:Direction.DOWN,Direction.DOWN:Direction.LEFT,Direction.LEFT:Direction.UP}
+		return clock[self]
+
+	def opposite(self):
+		opp={Direction.UP:Direction.DOWN,Direction.DOWN:Direction.UP,Direction.LEFT:Direction.RIGHT,Direction.RIGHT:Direction.LEFT}
+		return opp[self]
+
+	def anticlockwise(self):
+		return self.opposite().clockwise()
+
 class Player:
 	INSET_X=2
 	INSET_Y=2
@@ -43,5 +54,5 @@ class Player:
 	def make_painter(self):
 		return self.make_paint_helper
 
-	def get_next_move(self):
-		return self.bot.get_next_move()
+	def get_next_move(self,uid,game_state):
+		return self.bot.get_next_move(uid,game_state)

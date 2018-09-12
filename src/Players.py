@@ -7,13 +7,14 @@ import os
 import sys 
 
 from Player import *
+import GameState
 
 class Players:
 	BLANK=0
 
-	player_map={} #players
-	color_map={}
-	move_map={}
+	player_map={} #uid:player
+	color_map={} #uid:color
+	move_map={} #Direction:move_func
 	next_uid=1
 
 	def __init__(self):
@@ -66,7 +67,9 @@ class Players:
 			self.move_player(player,board)
 
 	def move_player(self,player,board):
-		move_enum=player.get_next_move()
+		game_state= GameState.GameState(board,self)
+		uid=player.uid
+		move_enum=player.get_next_move(uid,game_state)
 		try:
 			self.move_map[move_enum](player,board)
 		except:
