@@ -63,8 +63,11 @@ class Players:
 
 
 	def move(self,board):
+		move_list=[]
 		for player in self.player_map.values():
-			self.move_player(player,board)
+			mov=self.move_player(player,board)
+			move_list.append((player.uid,mov))
+		return move_list
 
 	def move_player(self,player,board):
 		game_state= GameState.GameState(board,self)
@@ -75,6 +78,7 @@ class Players:
 		except:
 			self.move_map[Direction(move_enum)](player,board)
 		board.set_claim(player.x_pos,player.y_pos,player)
+		return (player.x_pos,player.y_pos)
 
 	def move_player_left(self,player,board):
 		new_x_pos=player.x_pos-1
@@ -112,3 +116,6 @@ class Players:
 
 	def make_painter(self):
 		return self.make_paint_helper
+
+	def num_players(self):
+		return len(self.player_map.values())

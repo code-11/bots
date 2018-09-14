@@ -27,19 +27,14 @@ class Game:
 
 		pygame.display.flip()
 
-
-	def GetInput(self,board,players):
-		for event in pygame.event.get():
-			if event.type == QUIT:
-				return True
-			if event.type == KEYDOWN or event.type == MOUSEBUTTONDOWN:
-				print (event)
-				self.players.move(board)
-			sys.stdout.flush()  # get stuff to the console
-		return False
-
 	def quit_callback(self):
 		self.done = True
+
+	def go(self):
+		move_list=[]
+		for i in range(3):
+			move_list.append(self.players.move(self.board))
+		print(move_list)
 
 	def main(self):
 		# initialise pygame
@@ -57,7 +52,7 @@ class Game:
 		player_lbl = tkinter.Label(root,text="Number Players Loaded: "+str(self.players.num_players()))
 		player_lbl.pack()
 
-		b = tkinter.Button(root, text="OK") 
+		b = tkinter.Button(root, text="Move 100", command=self.go) 
 		b.pack()
 
 		# start pygame clock
@@ -71,8 +66,6 @@ class Game:
 			except:
 				print ("dialog error")
 
-			if self.GetInput(self.board,self.players):  # input event can also comes from diaglog
-			  break
 			self.Draw(Surface)
 			clock.tick(100) # slow it to something slightly realistic
 			gameframe += 1
